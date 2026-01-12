@@ -13,4 +13,8 @@ resource "google_compute_instance" "tf-chapter-06" {
   network_interface {
     network = "default"
   }
+
+  attached_disk {
+    source = google_compute_disk.tf-chapter-06.name
+  }
 }
