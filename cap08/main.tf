@@ -1,27 +1,28 @@
 resource "google_compute_address" "static_ip" {
-  name = "ipv4-address"
+  name = var.ip_publico
 }
 
 resource "google_compute_firewall" "allow_ssh_ex" {
-  name = "allow-ssh"
+  name = var.fw-name
   network = google_compute_network.vpc_network.name
 
   allow {
-    protocol = "tcp"
-    ports = [ "22", "80" ]
+    protocol = var.protocol_tipo
+    ports = var.fw_range_ports
   }
 
-  source_ranges = [ "0.0.0.0/0" ]
+  source_ranges = var.source_ranges
 }
 
 resource "google_compute_instance" "vm" {
-  name = "vm-exemplo"
-  machine_type = "e2-micro"
-  zone = "us-central1-a"
+  name = var.vm_name
+  machine_type = var.vm_machine_type
+  zone = var.zone
+  allow_stopping_for_update = var.vm_allow_stopping_for_update
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-12"
+      image = var.vm_image_boot_disk
     }
   }
 

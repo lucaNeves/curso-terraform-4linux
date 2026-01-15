@@ -57,3 +57,48 @@ variable "criar_subnets_automaticamente" {
   type = bool
   default = false
 }
+
+variable "ip_publico" {
+  type = string
+  default = "ipv4-address"
+}
+
+variable "fw-name" {
+  type = string
+  default = "allow-ssh"
+}
+
+variable "protocol_tipo" {
+  type = string
+  default = "tcp"
+}
+
+variable "fw_range_ports" {
+  type = list(string)
+  default = [ "22", "80", "8080" ]
+}
+
+variable "source_ranges" {
+  type = list(string)
+  default = [ "0.0.0.0/0" ]
+}
+
+variable "vm_name" {
+  type = string
+  default = "vm-exemplo"
+}
+
+variable "vm_machine_type" {
+  type = string
+  default = "e2-micro"
+}
+
+variable "vm_image_boot_disk" {
+  type = string
+  default = "debian-cloud/debian-12"
+}
+
+variable "vm_allow_stopping_for_update" {
+  type = bool
+  default = true
+}
